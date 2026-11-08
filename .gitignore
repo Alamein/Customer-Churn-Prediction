@@ -48,9 +48,5 @@ DOCS/
 src/
 scripts/
 notebooks/
-models/
 test/
-uv.lock
-config/
-main.py
 *.md
