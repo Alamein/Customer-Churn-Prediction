@@ -1,0 +1,57 @@
+.DS_Store
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+*.pyc
+.env
+*.h5
+*.csv
+
+*.json
+.DS_Store
+.ipynb_checkpoints/
+venv/
+data/raw/
+results/
+*.h5
+*.csv
+*.pickle
+*.keras
+
+
+# Virtual environments
+.venv
+
+# Environment variables
+.env
+
+# Logs
+logs/
+
+# TensorBoard
+tensorboard/
+
+# Checkpoints
+checkpoints/
+
+DATASET/*
+outputs/*
+
+# Per-run output directories (main.py, scripts/demo_predictions.py)
+runs/
+
+# ignored for some technical issues
+DOCS/
+src/
+scripts/
+notebooks/
+models/
+test/
+uv.lock
+requrements.txt
+config/
+main.py
+*.md

@@ -1,0 +1,72 @@
+[project]
+name = "trafficflow"
+version = "0.1.0"
+description = "Intelligent Traffic Flow Analysis and Accident Hotspot Prediction"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Adam Muhammad (ACCA)" }]
+license = { text = "Academic" }
+
+# Runtime dependencies. Lower-bounded so the resolver can pick patch-level
+# security fixes; tighten with an `uv lock` when you want bit-exact reproducibility.
+dependencies = [
+    # Computer vision + tracking (ByteTrack ships with Ultralytics, but its
+    # linear-assignment step still needs `lap` at runtime).
+    "ultralytics>=8.3",
+    "torch>=2.2",
+    "torchvision>=0.17",
+    "opencv-python>=4.9",
+    "lap>=0.5",
+    # Classical ML for the RF baseline
+    "scikit-learn>=1.4",
+    "xgboost>=2.0",
+    # Data + scientific stack
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scipy>=1.13",
+    # Visualisation
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "plotly>=5.18",
+    # Dashboard
+    "streamlit>=1.30",
+    # Utilities
+    "tqdm>=4.66",
+    "pyyaml>=6.0",
+    "pillow>=10.0",
+    "requests>=2.31",
+    "moviepy>=1.0",
+    "imageio>=2.34",
+    "psutil>=5.9",
+    "kaggle>=1.7.4.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+    "ipykernel>=6.29",
+    # Notebook tooling — for building / executing the thesis notebooks.
+    "nbformat>=5.10",
+    "nbconvert>=7.16",
+]
+
+# Tell uv this is a workspace, not a pip-installable package — no build backend
+# required, no `pip install -e .` step, just a deps-only environment.
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+markers = [
+    "slow: integration tests that download model weights or process real videos",
+]
