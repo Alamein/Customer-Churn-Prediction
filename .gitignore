@@ -51,7 +51,6 @@ notebooks/
 models/
 test/
 uv.lock
-requrements.txt
 config/
 main.py
 *.md
