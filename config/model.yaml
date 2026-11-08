@@ -1,0 +1,50 @@
+# Machine Learning Model Configuration
+# Hotspot prediction — Random Forest vs LSTM comparison (per proposal Objective 2)
+
+random_forest:
+  n_estimators: 100
+  max_depth: 20
+  min_samples_split: 5
+  min_samples_leaf: 2
+  random_state: 42
+  n_jobs: -1
+
+lstm:
+  input_dim: 10
+  hidden_dim: 128
+  num_layers: 2
+  dropout: 0.3
+  learning_rate: 0.001
+  batch_size: 32
+  epochs: 50
+  sequence_length: 60
+
+features:
+  selected_features:
+    - vehicle_count
+    - average_speed
+    - speed_variance
+    - traffic_density
+    - sudden_stops
+    - lane_changes
+    - acceleration_events
+    - time_of_day
+    - day_of_week
+    - weather_code
+  normalization: "standard"  # Options: standard, minmax, robust
+
+training:
+  test_size: 0.2
+  validation_size: 0.1
+  cross_validation_folds: 5
+  random_state: 42
+
+prediction:
+  hotspot_threshold: 0.7
+  time_window: 3600          # seconds (1 hour aggregation)
+  spatial_grid_size: 50      # metres per grid cell
+
+visualization:
+  heatmap_resolution: 100
+  color_scheme: "viridis"
+  opacity: 0.6

@@ -1,0 +1,22 @@
+# Multi-Object Tracking Configuration (ByteTrack via Ultralytics)
+# Switched from DeepSORT per Jakubec et al. (2025) — ByteTrack uses both
+# high- and low-confidence detections, reducing ID switches under occlusion.
+
+tracker:
+  name: "bytetrack"
+  config: "bytetrack.yaml"  # Ultralytics built-in tracker config
+  track_high_thresh: 0.5    # First-association detection confidence
+  track_low_thresh: 0.1     # Second-association detection confidence
+  new_track_thresh: 0.6     # Threshold to spawn a new track
+  track_buffer: 30          # Frames to retain a lost track before deletion
+  match_thresh: 0.8         # IoU threshold for data association
+
+speed_estimation:
+  window_frames: 5          # Frames used for speed smoothing
+  use_homography: false     # Set true once camera calibration is captured
+  homography_path: "config/homography.npy"
+
+output:
+  save_trajectories: true
+  trajectory_path: "data/processed/trajectories.csv"
+  draw_trail_length: 30     # Frames of trail to render per track
